@@ -5,6 +5,10 @@ const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const cors = require('cors')
 
+const authRouter = require('./auth/auth-router')
+const usersRouter = require('./users/users-router')
+const drinksRouter = require('./drinks/drinks-router')
+
 const app = express()
 
 const morganOption = (NODE_ENV === 'production')
@@ -14,6 +18,11 @@ const morganOption = (NODE_ENV === 'production')
 app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
+
+
+app.use('/api/auth', authRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/drinks', drinksRouter)
 
 app.get('/', (req, res) => {
        res.send('Hello, world!')
