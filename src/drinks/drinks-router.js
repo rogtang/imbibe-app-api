@@ -1,3 +1,4 @@
+require('dotenv').config()
 const path = require("path");
 const express = require("express");
 const xss = require("xss");
@@ -5,6 +6,7 @@ const fetch = require('node-fetch');
 const DrinksService = require("./drinks-service");
 const { requireAuth } = require("../middleware/jwt-auth");
 const axios = require("axios");
+const config = require('../config')
 
 const drinksRouter = express.Router();
 const bodyParser = express.json();
@@ -202,6 +204,7 @@ drinksRouter
       });
     }
     console.log(query)
+    const apikey = config.RAPIDAPI_KEY
     //enter fetch here...
     /*const url = `https://the-cocktail-db.p.rapidapi.com/search.php?s=${query}`;
     console.log(url)
@@ -221,7 +224,7 @@ drinksRouter
       "headers":{
       "content-type":"application/octet-stream",
       "x-rapidapi-host":"the-cocktail-db.p.rapidapi.com",
-      "x-rapidapi-key":"02f452b098mshbeb1a53ff5f47a7p129c48jsnb1cb78d3a166",
+      "x-rapidapi-key": "02f452b098mshbeb1a53ff5f47a7p129c48jsnb1cb78d3a166",
       "useQueryString":true
       },"params":{
       "s":`${query}`

@@ -10,6 +10,7 @@ TO FIX:
   DONE - fix "Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client"
   - is serializePost correct? response in postman is all empty strings but full data is in database per dbeaver
   - implement fuzzy search? where?
+  - how to hid x-rapidapikey in env variables?
 
 
 
