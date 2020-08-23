@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
 const DrinksService = require("./drinks-service");
 const { requireAuth } = require("../middleware/jwt-auth");
 const axios = require("axios");
-const config = require('../config')
+const { RAPIDAPI_KEY } = require('../config')
 
 const drinksRouter = express.Router();
 const bodyParser = express.json();
@@ -192,7 +192,7 @@ const serializePost = (post) => ({
   
   
 drinksRouter
-    .route("/search/:search_drink")
+    .route(`/search/:search_drink`)
     .all(requireAuth)
     .get((req, res, next) => {
     console.log(req.params.search_drink, "search drink name");
@@ -204,7 +204,10 @@ drinksRouter
       });
     }
     console.log(query)
-    const apikey = config.RAPIDAPI_KEY
+
+    //apikey not working in axios call
+    const apikey = RAPIDAPI_KEY
+
     //enter fetch here...
     /*const url = `https://the-cocktail-db.p.rapidapi.com/search.php?s=${query}`;
     console.log(url)
