@@ -200,7 +200,7 @@ drinksRouter
       headers: {
         "content-type": "application/octet-stream",
         "x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
-        "x-rapidapi-key": "02f452b098mshbeb1a53ff5f47a7p129c48jsnb1cb78d3a166",
+        "x-rapidapi-key": RAPIDAPI_KEY,
         useQueryString: true,
       },
       params: {
