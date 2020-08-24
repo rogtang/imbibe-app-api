@@ -158,13 +158,13 @@ drinksRouter
       user_id,
     };
 
-    /*const numberOfValues = Object.values(postToUpdate).filter(Boolean).length;
+    const numberOfValues = Object.values(postToUpdate).filter(Boolean).length;
     if (numberOfValues === 0)
       return res.status(400).json({
         error: {
           message: `Request body must content either notes or a rating.`,
         },
-      });*/
+      });
 
     DrinksService.updatePost(
       req.app.get("db"),
@@ -194,19 +194,6 @@ drinksRouter
     //apikey not working in axios call
     const apikey = RAPIDAPI_KEY;
 
-    //enter fetch here...
-    /*const url = `https://the-cocktail-db.p.rapidapi.com/search.php?s=${query}`;
-    console.log(url)
-    const fetch_response = await fetch(url, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
-        "x-rapidapi-key": "02f452b098mshbeb1a53ff5f47a7p129c48jsnb1cb78d3a166",
-        "Content-Type": "application/json",
-      }
-    });
-    const json = await fetch_response.json();
-    response.json(json);*/
     axios({
       method: "GET",
       url: "https://the-cocktail-db.p.rapidapi.com/search.php",
@@ -251,8 +238,7 @@ drinksRouter
         newDrink.user_id = req.user.id;
 
         console.log("new drink is", newDrink);
-        //use insertDrink, need to write condition that prevents idDrink from being used twice
-        //unable to get post.id (shows as undefined)
+
         DrinksService.insertDrink(knexInstance, newDrink)
           .then((post) => {
             console.log(post.id)

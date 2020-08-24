@@ -19,32 +19,16 @@ TO FIX:
 
 
 
-handleSubmit = e => {
-    e.preventDefault()
-    const {cocktail_name} = e.target
-    const post = {
-      cocktail_name: cocktail_name.value,
-    }
-
-    const url = `https://the-cocktail-db.p.rapidapi.com/search.php?s=${query}`;
+//enter fetch here...
+    /*const url = `https://the-cocktail-db.p.rapidapi.com/search.php?s=${query}`;
     console.log(url)
-    fetch(url, {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
-    "x-rapidapi-key": "02f452b098mshbeb1a53ff5f47a7p129c48jsnb1cb78d3a166",
-    "Content-Type": "application/json",
-	}
-})
-.then(res => {
-  if(!res.ok) {
-    throw new Error('Sorry, cocktail could not be found in database. Please try another search.');
-  }
-  return res.json();
-})
-.then(response => {
-	console.log(response.drinks[0]);
-})
-.catch(error => {
-	console.log(error);
-});
+    const fetch_response = await fetch(url, {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
+        "x-rapidapi-key": "02f452b098mshbeb1a53ff5f47a7p129c48jsnb1cb78d3a166",
+        "Content-Type": "application/json",
+      }
+    });
+    const json = await fetch_response.json();
+    response.json(json);*/
