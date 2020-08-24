@@ -1,10 +1,10 @@
 const DrinksService = {
   getDrinks(knex) {
-    return knex.select("*").from('imbibe_posts');
+    return knex.select("*").from("imbibe_posts");
   },
-  getById(knex, id){
-    return knex.select('*').from('imbibe_posts').where('id', id).first()
-},
+  getById(knex, id) {
+    return knex.select("*").from("imbibe_posts").where("id", id).first();
+  },
   getByUser(knex, user_id) {
     return knex
       .select("*")
@@ -13,65 +13,39 @@ const DrinksService = {
   },
   insertDrink(knex, newDrink) {
     console.log(newDrink);
-    return knex
-      .raw(
-        `
-        INSERT INTO imbibe_posts (
-            idDrink,
-            strDrink,
-            strTags,
-            strCategory,
-            strIBA,
-            strGlass,
-            strInstructions,
-            strDrinkThumb,
-            strIngredient1,
-            strIngredient2,
-            strIngredient3,
-            strIngredient4,
-            strIngredient5,
-            strIngredient6,
-            strIngredient7,
-            strMeasure1,
-            strMeasure2,
-            strMeasure3,
-            strMeasure4,
-            strMeasure5,
-            strMeasure6,
-            strMeasure7,
-            user_id
-            )
-		VALUES ('${newDrink.idDrink}', 
-                '${newDrink.strDrink}',  
-                '${newDrink.strTags}', 
-                '${newDrink.strCategory}', 
-                '${newDrink.strIBA}', 
-                '${newDrink.strGlass}', 
-                '${newDrink.strInstructions}', 
-                '${newDrink.strDrinkThumb}', 
-                '${newDrink.strIngredient1}', 
-                '${newDrink.strIngredient2}', 
-                '${newDrink.strIngredient3}', 
-                '${newDrink.strIngredient4}', 
-                '${newDrink.strIngredient5}',
-                '${newDrink.strIngredient6}',
-                '${newDrink.strIngredient7}', 
-                '${newDrink.strMeasure1}',
-                '${newDrink.strMeasure2}',
-                '${newDrink.strMeasure3}',
-                '${newDrink.strMeasure4}',
-                '${newDrink.strMeasure5}',
-                '${newDrink.strMeasure6}',
-                '${newDrink.strMeasure7}',
-                '${newDrink.user_id}'
-				);
-        `)
+    return knex("imbibe_posts")
+      .returning('*')
+      .insert({
+        iddrink: newDrink.idDrink,
+        strdrink: newDrink.strDrink,
+        strtags: newDrink.strTags,
+        strcategory: newDrink.strCategory,
+        striba: newDrink.strIBA,
+        strglass: newDrink.strGlass,
+        strinstructions: newDrink.strInstructions,
+        strdrinkthumb: newDrink.strDrinkThumb,
+        stringredient1: newDrink.strIngredient1,
+        stringredient2: newDrink.strIngredient2,
+        stringredient3: newDrink.strIngredient3,
+        stringredient4: newDrink.strIngredient4,
+        stringredient5: newDrink.strIngredient5,
+        stringredient6: newDrink.strIngredient6,
+        stringredient7: newDrink.strIngredient7,
+        strmeasure1: newDrink.strMeasure1,
+        strmeasure2: newDrink.strMeasure2,
+        strmeasure3: newDrink.strMeasure3,
+        strmeasure4: newDrink.strMeasure4,
+        strmeasure5: newDrink.strMeasure5,
+        strmeasure6: newDrink.strMeasure6,
+        strmeasure7: newDrink.strMeasure7,
+        user_id: newDrink.user_id,
+      })
+
       .then((rows) => {
-        return rows;
+        return rows[0];
       });
   },
   insertPost(knex, newDrink) {
-    console.log(newDrink)
     return knex
       .insert(newDrink)
       .into("imbibe_posts")
