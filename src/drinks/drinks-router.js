@@ -211,7 +211,7 @@ drinksRouter
         const newDrink = {
           idDrink: drink[0].idDrink,
           strDrink: drink[0].strDrink,
-          strTags: drink[0].strTags.split(",").join(", ").replace(/([a-z])([A-Z])/g, '$1 $2'),
+          strTags: drink[0].strTags,
           strCategory: drink[0].strCategory,
           strIBA: drink[0].strIBA,
           strGlass: drink[0].strGlass,

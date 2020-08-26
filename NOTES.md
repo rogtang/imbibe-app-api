@@ -7,10 +7,8 @@ test users:
 
 TO FIX:
   - prevent duplicate entries (i.e. if a user searches the same drink twice should get an error)
-  DONE - fix "Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client"
-  DONE - is serializePost correct? response in postman is all empty strings but full data is in database per dbeaver
   - implement fuzzy search? where?
-  - how to hid x-rapidapikey in env variables?
+  - how to add space between strTags if value is null
 
 
 

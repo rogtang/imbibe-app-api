@@ -19,6 +19,7 @@ const DrinksService = {
         iddrink: newDrink.idDrink,
         strdrink: newDrink.strDrink,
         strtags: newDrink.strTags,
+        //strtags: Object.values(newDrink.strTags).filter(Boolean).split(",").join(", ").replace(/([a-z])([A-Z])/g, '$1 $2'),
         strcategory: newDrink.strCategory,
         striba: newDrink.strIBA,
         strglass: newDrink.strGlass,
