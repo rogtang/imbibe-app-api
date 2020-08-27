@@ -1,0 +1,1 @@
+ALTER TABLE imbibe_posts DROP COLUMN IF EXISTS strVideo;

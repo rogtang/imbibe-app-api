@@ -39,6 +39,7 @@ const DrinksService = {
         strmeasure5: newDrink.strMeasure5,
         strmeasure6: newDrink.strMeasure6,
         strmeasure7: newDrink.strMeasure7,
+        strvideo: newDrink.strVideo,
         user_id: newDrink.user_id,
       })
 

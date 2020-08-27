@@ -35,6 +35,7 @@ const serializePost = (post) => ({
   strMeasure5: xss(post.strmeasure5),
   strMeasure6: xss(post.strmeasure6),
   strMeasure7: xss(post.strmeasure7),
+  strVideo: xss(post.strvideo),
   usernotes: xss(post.usernotes),
   rating: Number(post.rating),
   user_id: post.user_id,
@@ -231,6 +232,7 @@ drinksRouter
           strMeasure5: drink[0].strMeasure5,
           strMeasure6: drink[0].strMeasure6,
           strMeasure7: drink[0].strMeasure7,
+          strVideo: drink[0].strVideo
         };
 
         newDrink.user_id = req.user.id;
