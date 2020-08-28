@@ -8,7 +8,7 @@ test users:
 TO FIX:
   - prevent duplicate entries (i.e. if a user searches the same drink twice should get an error)
   - implement fuzzy search? where?
-  - how to add space between strTags if value is null
+
 
 
 
