@@ -11,6 +11,12 @@ const DrinksService = {
       .from("imbibe_posts")
       .where("imbibe_posts.user_id", user_id);
   },
+  findDrink(knex, drink_id) {
+    return knex
+      .select("*")
+      .from("imbibe_posts")
+      .where("iddrink", drink_id)
+  },
   insertDrink(knex, newDrink) {
     console.log(newDrink);
     return knex("imbibe_posts")
