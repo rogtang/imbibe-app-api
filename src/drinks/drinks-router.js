@@ -46,7 +46,7 @@ drinksRouter
   //comment out while auth is not fully implemented
   .get(requireAuth, (req, res, next) => {
     const knexInstance = req.app.get("db");
-    console.log(req.user);
+
     DrinksService.getByUser(knexInstance, req.user.id)
       .then((posts) => {
         res.json(posts.map(serializePost));
@@ -182,7 +182,6 @@ drinksRouter
   .route(`/search/:search_drink`)
   .all(requireAuth)
   .get((req, res, next) => {
-    console.log(req.params.search_drink, "search drink name");
     let query = req.params.search_drink;
     //not working
     if (!query) {
@@ -190,8 +189,6 @@ drinksRouter
         error: { message: "Name of a drink is required" },
       });
     }
-    console.log(query);
-
 
     axios({
       method: "GET",
@@ -208,6 +205,9 @@ drinksRouter
     })
       .then((response) => {
         const drink = response.data.drinks;
+        if (drink === null) {
+          return res.status(404).end();
+        }
         const knexInstance = req.app.get("db");
         const newDrink = {
           idDrink: drink[0].idDrink,
@@ -232,22 +232,30 @@ drinksRouter
           strMeasure5: drink[0].strMeasure5,
           strMeasure6: drink[0].strMeasure6,
           strMeasure7: drink[0].strMeasure7,
-          strVideo: drink[0].strVideo
+          strVideo: drink[0].strVideo,
         };
 
         newDrink.user_id = req.user.id;
 
-        console.log("new drink is", newDrink);
-
-        DrinksService.insertDrink(knexInstance, newDrink)
-          .then((post) => {
-            console.log(post.id)
-            res
-              .status(201)
-              .location(path.posix.join(req.originalUrl, `/${post.id}`))
-              .json(serializePost(post));
-          })
-          .catch(next);
+        DrinksService.findDrink(req.app.get("db"), newDrink.idDrink).then(
+          (post) => {
+            console.log(post);
+            if (post.length > 0) {
+              return res
+                .status(200)
+                .location(path.posix.join(req.originalUrl, `/${post.id}`))
+                .json(serializePost(post[0]));
+            }
+            DrinksService.insertDrink(knexInstance, newDrink)
+              .then((post) => {
+                res
+                  .status(201)
+                  .location(path.posix.join(req.originalUrl, `/${post.id}`))
+                  .json(serializePost(post));
+              })
+              .catch(next);
+          }
+        );
       })
       .catch((error) => {
         console.log(error);

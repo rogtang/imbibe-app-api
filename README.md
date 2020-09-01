@@ -1,26 +1,46 @@
-# Express Boilerplate!
+# Imbibe
 
-This is a boilerplate project used for starting new projects!
+## Summary
 
-## Set up
+Imbibe gives you instantaneous information and recipes for cocktails. Each user can curate a custom drink menu of old favorites and new discoveries to try. Utilizing the Cocktail Database API to retrieve cocktail data on the Imbibe server, the user can search by cocktail name and receive a listing of ingredients, instructions, IBA (International Bartender Association) info, an image of the cocktail and, for certain drinks, a YouTube tutorial on how to mix the drink. In addition, the user can add their own personal notes and ratings for each drink.
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+## Live Site
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server by entering command of `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+- [Link](https://imbibe.vercel.app/) to view it in the browser.
+- [Link](https://github.com/rogtang/imbibe-app-client) to view the client built with React.js.
+
+
+## Endpoints
+- /api/drinks
+    - GET (GETs all drinks from the logged-in user)
+- /api/drinks/:post_id
+    - GET (GETs an individual drink from the logged-in user)
+    - DELETE (DELETEs an individual drink post from the logged-in user)
+    - PATCH (Edits an individual drink post from the logged-in user)
+- /api/drinks/search/:search_drink
+    - GET (GETs the name of the user's drink query, requests the drink data from the Cocktail DB API, and inserts the drink data into the Imbibe Posts table)
+- /api/users
+    - GET (GETs all users stored in the Imbibe Users database)
+    - POST (Adds a new user in the Imbibe Users database)
+- /api/auth/login
+    - POST (Authenticates an existing user in the Imbibe Users database)
+
+## Built With (Server-side):
+
+- Node.js
+- Express.js
+- Knex.js (SQL Query Builder)
+- PostgreSQL
+- Supertest (Testing)
+- Mocha (Testing)
+- Chai (Testing)
 
 ## Scripts
+
+Install node modules `npm install`
 
 Start the application `npm start`
 
 Start nodemon for the application `npm run dev`
 
 Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
