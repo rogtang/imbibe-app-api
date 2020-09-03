@@ -44,7 +44,7 @@ const serializePost = (post) => ({
 drinksRouter
   .route("/")
   //comment out while auth is not fully implemented
-  .get(requireAuth, (req, res, next) => {
+  .get((req, res, next) => {
     const knexInstance = req.app.get("db");
 
     DrinksService.getByUser(knexInstance, req.user.id)
