@@ -169,7 +169,7 @@ drinksRouter
         DrinksService.findDrink(req.app.get("db"), newDrink.idDrink).then(
           (post) => {
             console.log(post);
-            if (post.length > 0) {
+            if (post.length > 0 && post.user_id === req.user.id) {
               return res
                 .status(200)
                 .location(path.posix.join(req.originalUrl, `/${post.id}`))
