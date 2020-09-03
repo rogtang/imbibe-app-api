@@ -109,7 +109,7 @@ drinksRouter
 
 drinksRouter
   .route(`/search/:search_drink`)
-  //.all(requireAuth)
+  .all(requireAuth)
   .get((req, res, next) => {
     let query = req.params.search_drink;
     //not working
