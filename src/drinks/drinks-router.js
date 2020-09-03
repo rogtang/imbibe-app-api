@@ -43,8 +43,7 @@ const serializePost = (post) => ({
 
 drinksRouter
   .route("/")
-  //comment out while auth is not fully implemented
-  .get((req, res, next) => {
+  .get(requireAuth, (req, res, next) => {
     const knexInstance = req.app.get("db");
 
     DrinksService.getByUser(knexInstance, req.user.id)
@@ -53,76 +52,6 @@ drinksRouter
       })
       .catch(next);
   });
-/*  .post(requireAuth, bodyParser, (req, res, next) => {
-      const {
-        name,
-        url,
-        address,
-        usernotes,
-        price_rating,
-        size_rating,
-        location_rating,
-      } = req.body;
-  
-      if (!name) {
-        return res.status(400).send({
-          error: { message: "'Name' is required" },
-        });
-      }
-  
-      if (!address) {
-        return res.status(400).send({
-          error: { message: "'Address' is required" },
-        });
-      }
-  
-      if (!price_rating) {
-        return res.status(400).send({
-          error: { message: "A price rating is required" },
-        });
-      }
-  
-      if (!size_rating) {
-        return res.status(400).send({
-          error: { message: "A size rating is required" },
-        });
-      }
-  
-      if (!location_rating) {
-        return res.status(400).send({
-          error: { message: "A location rating is required" },
-        });
-      }
-  
-      if ((url && !isWebUri(url))) {
-        return res.status(400).send({
-          error: { message: "'url' must be a valid URL"}
-        })
-      }
-  
-      const knexInstance = req.app.get("db");
-      const newPost = {
-        name,
-        url,
-        address,
-        usernotes,
-        price_rating,
-        size_rating,
-        location_rating
-      };
-  
-      newPost.user_id = req.user.id;
-  
-      DrinksService.insertPost(knexInstance, newPost)
-        .then((post) => {
-          res
-            .status(201)
-            .location(path.posix.join(req.originalUrl, `/${post.id}`))
-            .json(serializePost(post));
-        })
-        .catch(next);
-    });
-    */
 
 drinksRouter
   .route("/:post_id")
@@ -180,7 +109,7 @@ drinksRouter
 
 drinksRouter
   .route(`/search/:search_drink`)
-  .all(requireAuth)
+  //.all(requireAuth)
   .get((req, res, next) => {
     let query = req.params.search_drink;
     //not working
