@@ -19,7 +19,7 @@ const serializePost = (post) => ({
   strCategory: xss(post.strcategory),
   strIBA: xss(post.striba),
   strGlass: xss(post.strglass),
-  strInstructions: xss(post.strinstructions),
+  strinstructions: xss(post.strinstructions),
   strDrinkThumb: xss(post.strdrinkthumb),
   strIngredient1: xss(post.stringredient1),
   strIngredient2: xss(post.stringredient2),
@@ -80,9 +80,10 @@ drinksRouter
       .catch(next);
   })
   .patch(bodyParser, (req, res, next) => {
-    const { usernotes, rating, user_id } = req.body;
+    const { strinstructions, usernotes, rating, user_id } = req.body;
 
     const postToUpdate = {
+      strinstructions,
       usernotes,
       rating,
       user_id,
@@ -95,7 +96,6 @@ drinksRouter
           message: `Request body must content either notes or a rating.`,
         },
       });
-
     DrinksService.updatePost(
       req.app.get("db"),
       req.params.post_id,
@@ -168,8 +168,9 @@ drinksRouter
 
         DrinksService.findDrink(req.app.get("db"), newDrink.idDrink).then(
           (post) => {
-            console.log(post);
-            if (post.length > 0 && post.user_id === req.user.id) {
+            //console.log(req.user.id, '+', post[0].user_id, post);
+            // if (post.length > 0 && post[0].user_id == req.user.id) {
+              if (post.length > 0 ) {
               return res
                 .status(200)
                 .location(path.posix.join(req.originalUrl, `/${post.id}`))

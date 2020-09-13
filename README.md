@@ -25,6 +25,20 @@ Imbibe gives you instantaneous information and recipes for cocktails. Each user 
 - /api/auth/login
     - POST (Authenticates an existing user in the Imbibe Users database)
 
+## Screenshots
+
+- Landing Page:
+  ![Landing page](src/screenshots/imbibe-lp.png)
+  ![Landing page](src/screenshots/imbibe-lp2.png)
+- Dashboard/Menu:
+  ![Dashboard/Menu](src/screenshots/imbibe-menu-crop.png)
+  ![Dashboard/Menu](src/screenshots/imbibe-menu-2.png)
+- Cocktail Info:
+  ![Cocktail](src/screenshots/imbibe-drink.png)
+  ![Cocktail](src/screenshots/imbibe-drink-bottom.png)
+- Adding a Cocktail:
+  ![Add Cocktail](src/screenshots/imbibe-add-cocktail.png)
+
 ## Built With (Server-side):
 
 - Node.js
