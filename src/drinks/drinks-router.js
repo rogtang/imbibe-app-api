@@ -2,7 +2,6 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const xss = require("xss");
-const fetch = require("node-fetch");
 const DrinksService = require("./drinks-service");
 const { requireAuth } = require("../middleware/jwt-auth");
 const axios = require("axios");
@@ -166,10 +165,8 @@ drinksRouter
 
         newDrink.user_id = req.user.id;
 
-        DrinksService.findDrink(req.app.get("db"), newDrink.idDrink).then(
+        DrinksService.findDrink(req.app.get("db"), newDrink.idDrink, newDrink.user_id).then(
           (post) => {
-            //console.log(req.user.id, '+', post[0].user_id, post);
-            // if (post.length > 0 && post[0].user_id == req.user.id) {
               if (post.length > 0 ) {
               return res
                 .status(200)
